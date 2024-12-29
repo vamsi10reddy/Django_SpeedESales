@@ -1,0 +1,123 @@
+{% extends 'components/base.html' %}
+{% block content %}
+{% include 'components/category_carousel.html' %}
+{% load static %}
+
+<!-- Featured Products -->
+<div class="container">
+    <h1 class="text-center text-white mt-5">Featured Products</h1>
+    <div id="featured-products" class="container align-items-center mt-5">
+
+        <!-- Products Container -->
+        <div class="products-container">
+            {% for product in featured_products %}
+            <div class="product-card">
+
+                <div class="product-image">
+                    <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                    {% if product.old_price and product.old_price > product.price %}
+                    <div class="off-percentage">
+                        -{{ product.discount_percentage }}%
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="product-details">
+                    <div class="badge bg-info text-white">
+                        Featured Product
+                    </div>
+                    <p class="category">{{ product.category.title }}</p>
+                    <h3>{{ product.title }}</h3>
+                    <p class="description">{{ product.description }}</p>
+                    <div class="price-and-cart">
+                        <p class="price">
+                            <strong>${{ product.price }}</strong>
+                            {% if product.old_price %}
+                            <span class="old-price">${{ product.old_price }}</span>
+                            {% endif %}
+                        </p>
+
+                        {% csrf_token %}
+                        <!-- Add to Cart form -->
+                        <form>
+                            <!-- Quantity Form -->
+                            <div data-mdb-input-init class="form-outline" style="width:em; padding:15px;">
+                                <label class="form-label" for="quantityInput">Quantity:</label>
+                                <input id="qty-{{product.id}}" step="1" value="1" min="1" type="number" class="form-control"/>
+                            </div>
+                            <div class="card-body">
+                                <!-- Add to cart-->
+                                <button type="button" value="{{product.id}}" data-index="{{product.id}}"class="btn btn-warning add-to-cart small-button">
+                                    Add to Cart
+                                </button>
+                                <a href="{% url 'core:view_details' product.id %}" style="text-decoration: none;"><button type="button" class="btn btn-primary small-button">
+                                    See Details
+                                </button></a>
+                            </div>
+                        </form>
+                                                                                                                    
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="alert-badge" class="alert alert-primary alert-dismissible fade" role="alert" style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;">
+            placeholder
+        </div>
+    </div>
+</div>
+
+<!-- js/ajax to deal with button -->
+<script>
+    //show the user status badge
+    $(document).ready(function() {
+        // Automatically hide the alert after 5 seconds
+        setTimeout(function() {
+            $('#alert-badge').alert('close');
+            $('#alert-badge').removeClass('show');
+        }, 5000);
+    });
+    //look for button
+    $(document).on('click','.add-to-cart', function(inp){
+        inp.preventDefault();
+        const productId = $(this).data('index');
+        const qty = $(`#qty-${productId}`).val();
+        console.log( productId)
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cart:add_to_cart' %}",
+            data: {
+                id: productId,
+                qty:  qty,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            
+            success: function(json){
+                console.log('Added: ', productId)
+                document.getElementById('cart-count').textContent = '(' + json.qty + ')'
+
+                //Success badge
+                document.getElementById('alert-badge').textContent = "Item added to cart."
+                $('#alert-badge').addClass('show alert-success');
+                // Hide after 5 seconds
+                setTimeout(function () {
+                    $('#alert-badge').removeClass('show alert-success');
+                }, 5000);
+            },
+
+            error: function(){
+                console.log("Error adding to cart")
+
+                //error badge
+                document.getElementById('alert-badge').textContent = "Unable to add item to cart."
+                $('#alert-badge').addClass('show alert-danger');
+                // Hide after 5 seconds
+                setTimeout(function () {
+                    $('#alert-badge').removeClass('show alert-danger');
+                }, 5000);
+            }
+        });
+    });
+</script>
+
+{% endblock %}

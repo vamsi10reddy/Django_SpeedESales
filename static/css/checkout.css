@@ -1,0 +1,42 @@
+/* Update the background and text color for order summary */
+.bg-black {
+    background-color: #f8f9fa;  /* Light background for better readability */
+    color: #333;  /* Dark text color */
+}
+
+/* Adjust the list group item color */
+.list-group-item {
+    background-color: #ffffff;  /* White background for each product */
+    color: #333;  /* Dark text color */
+    border: 1px solid #ddd;  /* Light border for separation */
+}
+
+/* Adjust the list group item color */
+.list-group-items {
+    color: #080707;  /* Dark text color */
+    font-size: 1.1rem; /* Larger text for better readability */
+    padding: 10px;  /* Add some padding for spacing */
+}
+/* Hover effect for list items */
+.list-group-item:hover {
+    background-color: #e9ecef;  /* Slightly darker background on hover */
+}
+
+/* Update the buttons */
+.btn-info {
+    background-color: #007bff;  /* Bright blue button for better contrast */
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #0056b3;  /* Darker blue on hover */
+}
+
+/* Add a custom arrow using CSS */
+.form-group select {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" class="h-4 w-4 text-gray-500" %3E%3Cpath d="M6 8l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+    background-position: right 10px center; /* Position the arrow */
+    background-repeat: no-repeat;
+    background-size: 12px; /* Arrow size */
+    padding-right: 30px; /* Add space for the arrow */
+}

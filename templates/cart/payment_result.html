@@ -1,0 +1,17 @@
+<!-- payment_results.html -->
+{% extends 'components/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    {% if status == 'success' %}
+        <h1 class="text-center text-success">Payment Successful!</h1>
+        <p class="text-center">{{ message }}</p>
+    {% else %}
+        <h1 class="text-center text-danger">Payment Failed</h1>
+        <p class="text-center">{{ message }}</p>
+        <p class="text-center">Please try again or contact support if the issue persists.</p>
+    {% endif %}
+    <div class="text-center mt-3">
+        <a href="/" class="btn btn-primary">Return to Homepage</a>
+    </div>
+</div>
+{% endblock %}

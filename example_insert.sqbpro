@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="23967"/><column_width id="4" width="0"/></tab_structure><tab_browse><table title="." custom_title="0" dock_id="5" table="0,0:"/><dock_state state="000000ff00000000fd0000000100000002000004e600000381fc0100000005fb000000160064006f0063006b00420072006f00770073006500310100000000000004e60000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000000004e60000000000000000fb000000160064006f0063006b00420072006f00770073006500330100000000000004e60000000000000000fb000000160064006f0063006b00420072006f00770073006500340100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500350100000000ffffffff0000011800ffffff0000028f0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">-- Insert products into core_product table with Amazon as the vendor and Technology as the category
+INSERT INTO core_product (pid, title, image, description, price, specifications, product_status, status, in_stock, featured, digital, sku, date, category_id, vendor_id)
+VALUES
+('PID165423', 'Amazon Fire TV Stick 4K', 'placeholder.jpg', 'Stream in 4K with the Fire TV Stick, supports Dolby Vision and HDR10+.', 39.99, '4K streaming, Dolby Vision, HDR10+', 'active', 1, 1, 0, 1, 'SKU30001', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID275634', 'Amazon Echo Dot 4th Gen', 'placeholder.jpg', 'Compact smart speaker with Alexa, delivering clear sound and voice control.', 49.99, 'Alexa, compact design, voice control', 'active', 1, 1, 0, 1, 'SKU30002', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID385745', 'Amazon Kindle Paperwhite', 'placeholder.jpg', 'A waterproof Kindle with a high-resolution display and adjustable front light.', 129.99, 'Waterproof, 6-inch display, 8GB storage', 'active', 1, 1, 0, 1, 'SKU30003', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID495856', 'Amazon Ring Video Doorbell', 'placeholder.jpg', 'See, hear, and speak to visitors from your smartphone, tablet, or PC with this video doorbell.', 99.99, 'HD video, two-way audio, night vision', 'active', 1, 1, 0, 1, 'SKU30004', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID605967', 'Amazon Echo Show 8', 'placeholder.jpg', 'Smart display with Alexa and an 8-inch HD screen, perfect for video calls and entertainment.', 129.99, '8-inch screen, Alexa, video calls', 'active', 1, 1, 0, 1, 'SKU30005', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID715078', 'Amazon Fire HD 10 Tablet', 'placeholder.jpg', '10-inch tablet with a full HD display and 32GB of storage.', 149.99, '10-inch screen, 32GB storage, Full HD', 'active', 1, 1, 0, 1, 'SKU30006', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID825189', 'Amazon Smart Plug', 'placeholder.jpg', 'Smart plug that works with Alexa to control devices with your voice or app.', 24.99, 'Voice control, Alexa-compatible, smart plug', 'active', 1, 1, 0, 1, 'SKU30007', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID935290', 'AmazonBasics HDMI Cable', 'placeholder.jpg', 'High-speed HDMI cable for connecting devices with 4K and 1080p support.', 7.99, 'High-speed, 4K support, 6 feet long', 'active', 1, 1, 0, 1, 'SKU30008', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID1043901', 'Amazon Fire TV Cube', 'placeholder.jpg', 'All-in-one streaming device that integrates with Alexa for hands-free control.', 119.99, '4K, Alexa, voice control, streaming', 'active', 1, 1, 0, 1, 'SKU30009', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID1145012', 'Amazon Echo Studio', 'placeholder.jpg', 'High-fidelity smart speaker with Alexa and immersive sound for any room.', 199.99, 'Alexa, high-fidelity, immersive sound', 'active', 1, 1, 0, 1, 'SKU30010', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID1256123', 'Amazon Blink Outdoor Camera', 'placeholder.jpg', 'Wireless outdoor camera with HD video and night vision for 24/7 security.', 99.99, 'HD video, wireless, night vision', 'active', 1, 1, 0, 1, 'SKU30011', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID1367234', 'Amazon Fire TV Stick 4K Max', 'placeholder.jpg', 'Streaming device with 4K support and enhanced Wi-Fi connectivity for faster streaming.', 54.99, '4K streaming, faster Wi-Fi, Alexa', 'active', 1, 1, 0, 1, 'SKU30012', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID1478345', 'Amazon Echo Buds', 'placeholder.jpg', 'True wireless earbuds with Alexa integration, noise cancellation, and customizable fit.', 119.99, 'Wireless, Alexa, noise cancellation', 'active', 1, 1, 0, 1, 'SKU30013', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID1589456', 'Amazon Fire HD 8 Tablet', 'placeholder.jpg', '8-inch tablet with a vibrant display and 32GB storage for on-the-go entertainment.', 89.99, '8-inch screen, 32GB storage', 'active', 1, 1, 0, 1, 'SKU30014', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon')),
+
+('PID1690567', 'Amazon Kindle Oasis', 'placeholder.jpg', 'The premium Kindle with a 7-inch display, waterproof, and adjustable warm light for reading day or night.', 249.99, '7-inch display, waterproof, adjustable light', 'active', 1, 1, 0, 1, 'SKU30015', CURRENT_TIMESTAMP, 
+ (SELECT id FROM core_category WHERE title = 'Technology'), 
+ (SELECT id FROM core_vendor WHERE title = 'Amazon'));
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

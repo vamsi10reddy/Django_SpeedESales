@@ -1,0 +1,243 @@
+{% extends 'components/base.html' %}
+{% block content %}
+<h1 class="text-center text-white mt-5 m-3 border rounded p-5">
+    Cart
+</h1>
+<div class="row m-3">
+    {%if cart_data %}
+    <div id="cart-products" class="col-6 col-lg-8">
+        <h1 class="text-center text-white mt-3">
+            Items
+        </h1>
+        <div class="container align-items-c mt-5">
+            <!--Check if the cart has items -->
+            
+            <!-- If the cart has items display them with product cards-->
+            {% for product, qty in cart_data %}
+                    <div class="row mt-5 align-items-center justify-content-center">
+                        <!--Product Image-->
+                        <img src="{{product.image.url}}" class="img-fluid col-12 col-md-6 col-lg-4 rounded-5 mb-2 mb-md-0" alt="A photo of {{product.name}}">
+                        <!--Product Data-->
+                        <div class="card col-10 col-md-6" >
+                            {% if product.featured %}
+                            <div class="badge bg-info text-white position-lg-absolute mt-2 mt-lg-0" style="top: 3rem; right: 0.75rem">
+                                Featured Product
+                            </div>
+                            {% endif %}
+                            <!--Product Data-->
+                            <div class="row card-body">
+                                <h5 class="text-start col-12 col-lg-8 card-title" id="product-name">{{product.name}}</h5>
+                                <h5 class="text-start text-lg-end col-12 col-lg-4 card-title">
+                                    <i>${{product.price}}</i>
+                                </h5>
+                                <p class="col-12 card-text">
+                                    {{product.description}}
+                                </p>
+        
+                            </div>
+                            <!-- Add to Cart form -->
+                            <form>
+                                <!-- Quantity Form -->
+                                <div data-mdb-input-init class="form-outline" style="width:em; padding:15px;">
+                                    <label class="form-label" for="quantityInput">Quantity:</label>
+                                    <input id="qty-{{product.id}}" step="1" value="{{qty}}" min="0" type="number" class="form-control"/>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Add to cart-->
+                                    <button type="button" value="{{product.id}}" data-index="{{product.id}}"class="btn btn-warning update-cart">
+                                        Update Cart
+                                    </button>
+                                    <button type="button" class="btn btn-primary">See Details</button>
+                                    <button type="button" value="{{product.id}}" data-index="{{product.id}}"class="btn btn-danger remove-from-cart">
+                                        Remove
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <h1 class="text-center text-white mt-3" id="qty-display-{{product.id}}">
+                                {{ qty }}
+                            </h1>
+                        </div>
+                    </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    <div id="cart-summary" class="col-6 col-lg-4 ps-5 border-start">
+        <h1 class="text-center text-white mt-3">
+            Summary
+        </h1>
+        <div class="row align-items-c mt-3 text-white  rounded bg-black bg-opacity-50 ps-4 p-3">
+            <div class="row mt-2">
+                <h5 class="col-6 text-start">
+                    Subtotal:
+                </h5>
+                <h5 class="col-6 text-end font-italic" id="subtotal">
+                    <i>${{subtotal}}</i>
+                </h5>
+            </div>
+            <div class="row mt-2">
+                <h5 class="col-6 text-start">
+                    Estimated Taxes: 
+                </h5>
+                <h5 class="col-6 text-end" id="taxes">
+                    <i>+ ${{taxes}}</i>
+                </h5>
+            </div>
+            <div class="row pt-2 border-top">
+                <h5 class="col-6 text-start">
+                    Total:
+                </h5>
+                <h5 class="col-6 text-end" id="total">
+                    <i>${{total}}</i>
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <!-- Add to cart -->
+                <form method="GET" action="{% url 'cart:checkout' %}">
+                    <button type="submit" id="checkout-cart" class="btn btn-info text-white mt-2 me-2">
+                        Check out
+                    </button>
+                </form>
+                <!-- Empty cart -->
+                <button type="button" id="empty-cart" class="btn btn-danger mt-2 me-2">
+                    Empty Cart
+                </button>
+            </div>
+        </div>
+        <div id="cart-badge" class="alert alert-primary alert-dismissible fade" role="alert" style="position: fixed; bottom: 30px; right: 20px; z-index: 10;">
+            placeholder
+        </div>
+    </div>
+    {% else %}
+    <h3 class="text-center text-white mt-3">
+        Your cart is empty
+    </h3>
+    {% endif %}
+</div>
+
+<!-- js/ajax to deal with button -->
+<script>
+    //deal with updating the cart
+    $(document).on('click','.update-cart', function(inp){
+        inp.preventDefault();
+        const productId = $(this).data('index');
+        const qty = $(`#qty-${productId}`).val();
+        console.log( productId)
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cart:update_cart' %}",
+            data: {
+                id: productId,
+                qty:  qty,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            
+            success: function(json){
+                console.log('Added: ', productId)
+                document.getElementById('cart-count').textContent = '(' + json.qty + ')';
+                document.getElementById(`qty-display-${productId}`).textContent =  json.item_qty;
+                document.getElementById('subtotal').innerHTML = '<i>$' + json.subtotal.toFixed(2) + '</i>';
+                document.getElementById('taxes').innerHTML = '<i>+ $' + json.taxes.toFixed(2) + '</i>';
+                document.getElementById('total').innerHTML = '<i>$' + json.total.toFixed(2) + '</i>';
+
+                //Success badge
+                document.getElementById('cart-badge').textContent = "Updated item: " + productId
+                $('#cart-badge').addClass('show');
+                $('#cart-badge').addClass('alert-warning');
+                // Hide after 5 seconds
+                setTimeout(function () {
+                    $('#cart-badge').removeClass('show');
+                    $('#cart-badge').removeClass('alert-warning');
+                }, 5000);
+            },
+
+
+            error: function(){
+                console.log("Error updating to cart")
+
+                //error badge
+                document.getElementById('cart-badge').textContent = "Unable to update the cart."
+                $('#cart-badge').addClass('show');
+                $('#cart-badge').addClass('alert-danger');
+                // Hide after 5 seconds
+                setTimeout(function () {
+                    $('#cart-badge').removeClass('show');
+                    $('#cart-badge').removeClass('alert-danger');
+                }, 5000);
+            }
+        });
+    });
+
+    //deal with removing items to the cart
+    $(document).on('click','.remove-from-cart', function(inp){
+        inp.preventDefault();
+        const productId = $(this).data('index');
+        console.log("Removing:",productId);
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cart:rem_from_cart' %}",
+            data: {
+                id: productId,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            
+            success: function(json){
+                console.log('Removed: ', productId)
+                location.reload();
+            },
+
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+
+                //error badge
+                document.getElementById('cart-badge').textContent = "Unable to remove item from the cart."
+                $('#cart-badge').addClass('show');
+                $('#cart-badge').addClass('alert-danger');
+                // Hide after 5 seconds
+                setTimeout(function () {
+                    $('#cart-badge').removeClass('show');
+                    $('#cart-badge').removeClass('alert-danger');
+                }, 5000);
+            }
+        });
+    });
+</script>
+
+<script>
+// Handle empty cart button
+$(document).on('click', '#empty-cart', function (inp) {
+    inp.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'cart:empty_cart' %}",
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            action: 'post'
+        },
+        success: function (json) {
+            console.log('Cart Emptied');
+            location.reload(); // Refresh the page to reflect changes
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', error);
+
+            // Show error badge
+            document.getElementById('cart-badge').textContent = "Unable to empty the cart.";
+            $('#cart-badge').addClass('show');
+            $('#cart-badge').addClass('alert-danger');
+            // Hide after 5 seconds
+            setTimeout(function () {
+                $('#cart-badge').removeClass('show');
+                $('#cart-badge').removeClass('alert-danger');
+            }, 5000);
+        }
+    });
+});
+</script>
+
+{% endblock %}

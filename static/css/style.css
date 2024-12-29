@@ -1,0 +1,553 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+nav {
+    background-color: #91e4e1; /* Background color for the nav */
+    padding: 10px 20px; /* Padding for top/bottom and left/right */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space items evenly */
+}
+
+.logo {
+    flex: 0 0 auto; /* Prevent logo from growing */
+}
+
+.logo-image {
+    width: 100px; /* Set the width of the logo image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.nav-container {
+    display: flex; /* Use flexbox to arrange dropdown and search */
+    align-items: center; /* Center items vertically */
+    margin-left: 20px; /* Space between logo and nav items */
+}
+
+/* Style for the dropdown button */
+.dropbtn {
+    background-color: #0f0303; /* Background color */
+    color: white; /* Text color */
+    padding: 8px 12px; /* Padding */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 14px; /* Font size */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Style for the dropdown container */
+.dropdown {
+    position: relative; /* Position relative to parent */
+    display: inline-block; /* Inline block display */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none; /* Initially hide the dropdown content */
+    position: absolute; /* Position below the dropdown button */
+    background-color: #110d0d;; /* Light grey background color */
+    min-width: 160px; /* Minimum width */
+    z-index: 1; /* On top of other elements */
+    border: 1px solid #f2efef; /* Border around dropdown */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 8px 16px 0px rgba(8, 1, 1, 0.2); /* Drop shadow */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition */
+    opacity: 0; /* Start with invisible */
+}
+
+
+/* Show the dropdown content when hovering over the dropdown container */
+.dropdown:hover .dropdown-content {
+    display: block; /* Show dropdown */
+    opacity: 1; /* Make it fully visible */
+}
+
+/* Style for each dropdown item */
+.dropdown-content a {
+    color: #e8dcdc88; /* Text color */
+    padding: 12px 16px; /* Padding */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block display */
+}
+
+/* Change color of links on hover */
+.dropdown-content a:hover {
+    background-color: rgba(240, 239, 239, 0.1); /* Light highlight on hover */
+}
+
+
+/* Style for the search bar */
+.search-bar {
+    display: flex; /* Flexbox for input and button */
+    max-width: 600px; /* Set maximum width for the search bar */
+    margin: 0 15px; /* Margin to add some space around */
+    flex-grow: 1; /* Allow the search bar to grow and fill available space */
+    background-color: white; /* White background for the search bar */
+    border-radius: 4px; /* Rounded corners for the entire search bar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    overflow: hidden; /* Prevent overflow from input */
+}
+
+.search-bar input {
+    padding: 10px; /* Padding for input */
+    border: none; /* Remove border */
+    border-radius: 4px 0 0 4px; /* Rounded corners for left side */
+    flex: 1; /* Allow the input to take up available space */
+    min-width: 0; /* Prevent input from being too small */
+    font-size: 16px; /* Increase font size for better readability */
+}
+
+/* Style for search button */
+.search-bar button {
+    padding: 10px 15px; /* Padding for button */
+    background-color: #e39631; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 0 4px 4px 0; /* Rounded corners for right side */
+    font-size: 16px; /* Increase font size for button */
+    transition: background-color 0.3s ease; /* Transition for button hover effect */
+}
+
+/* Button hover effect */
+.search-bar button:hover {
+    background-color: #d68c28; /* Darker shade on hover */
+}
+
+
+
+/* Style for navigation links */
+.nav-links {
+    display: flex; /* Use flexbox to arrange items */
+    align-items: center; /* Center items vertically */
+}
+
+.nav-links a {
+    color: white; /* Change the text color to white */
+    text-decoration: none; /* Remove underline from links */
+    margin-left: 20px; /* Space between links */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Arrange items vertically within the link */
+    align-items: center; /* Center items horizontally */
+}
+
+.nav-item {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange image above text */
+    align-items: center; /* Center items horizontally */
+}
+
+.nav-icon {
+    width: 24px;  /* Set a smaller width for the icons */
+    height: 24px; /* Set a smaller height for the icons */
+    margin-bottom: 4px; /* Space between icon and text */
+}
+
+/* Additional styles for improved layout */
+.nav-links {
+    margin-left: auto; /* Pushes the nav links to the right */
+}
+
+.category-item img {
+    width: 150px;  /* Set the width you want */
+    height: 150px; /* Set the height you want */
+    object-fit: cover; /* Ensures images keep their aspect ratio and fill the space */
+}
+
+/* Carousel container */
+.carousel {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Carousel inner wrapper */
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item{
+    max-height: 70vh;
+}
+
+/* Image styling */
+.carousel-item img {
+    width: 100%; /* Makes image fill the container width */
+    height: 310px; /* Set a fixed height for all images */
+    object-fit: cover; /* Cover the area, maintaining aspect ratio */
+}
+
+
+/* Navigation arrows */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Positioning the arrows */
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.next {
+    right: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+/* Hide arrows on small screens */
+@media (max-width: 600px) {
+    .prev, .next {
+        display: none;
+    }
+}
+
+.button {
+    position: absolute;
+    bottom: 20px; /* Distance from the bottom of the image */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff9900; /* Amazon-style orange color */
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 30px; /* Rounded edges */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 1; /* Ensure it stays on top */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+}
+
+.button:hover {
+    background-color: #e68a00; /* Darker orange on hover */
+    transform: translateX(-50%) scale(1.05); /* Slight scaling on hover */
+}
+
+/*
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+*/
+.footer
+{
+    height: 40px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding-top: 10px;
+    margin-top: 5em;
+    text-align: center;
+}
+
+/* Profile dropdown container */
+.profile_dropdown {
+    position: relative; /* Position relative for dropdown */
+    display: inline-block; /* Display inline for the button */
+}
+
+/* Profile dropdown button */
+.profile_dropbtn {
+    background-color: transparent; /* No background for the button */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Align items in a column */
+    align-items: center; /* Center items horizontally */
+}
+
+/* Profile icon */
+.nav-icon {
+    width: 40px; /* Width of the profile icon */
+    height: 40px; /* Height of the profile icon */
+    margin-bottom: 4px; /* Space below the icon */
+}
+
+/* Profile text */
+.profile-text {
+    color: #000; /* Color of profile text */
+    font-size: 14px; /* Font size for profile text */
+    margin-bottom: 2px; /* Space below the profile text */
+}
+
+/* Dropdown arrow */
+.dropdown-arrow {
+    margin-top: 2px; /* Space between text and dropdown arrow */
+}
+
+/* Dropdown content (hidden by default) */
+.profile_dropdown-content {
+    display: none; /* Initially hide the dropdown content */
+    position: absolute; /* Position relative to the button */
+    right: 0; /* Align to the right of the button */
+    top: 100%; /* Position it directly below the button */
+    background-color: #110d0d; /* Set a white background color */
+    min-width: 160px; /* Set minimum width */
+    z-index: 1; /* On top of other elements */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Drop shadow */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition */
+    opacity: 0; /* Start with invisible */
+}
+
+/* Show the dropdown content when hovering over the dropdown container */
+.profile_dropdown:hover .profile_dropdown-content {
+    display: block; /* Show dropdown */
+    opacity: 1; /* Make it fully visible */
+}
+
+/* Style for each dropdown item */
+.profile_dropdown-content a {
+    margin: 0; /* Remove margin */
+    padding: 12px 16px; /* Ensure consistent padding */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block display */
+    text-align: left; /* Align text to the left */
+    background-color: transparent; /* No background color by default */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+    color: rgb(246, 248, 248);
+}
+
+/* Change color of links on hover */
+.profile_dropdown-content a:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light highlight on hover */
+}
+
+
+/* Change color of links on hover */
+.profile_dropdown-content a:hover {
+    background-color: rgba(240, 239, 239, 0.1); /* Light highlight on hover */
+}
+
+/* Prevent dropdown from going off-screen */
+@media (max-width: 600px) {
+    .profile_dropdown-content {
+        right: 0; /* Align to the right of the button */
+    }
+}
+
+
+.nav-item {
+    position: relative; /* Ensure positioning for absolute elements */
+    display: flex; /* Flex to align items */
+    align-items: center; /* Center vertically */
+}
+
+.count {
+    margin-left: 8px; /* Space between text and count */
+    background-color: rgb(126, 108, 181); /* Red background for visibility */
+    color: #fff; /* White text color */
+    border-radius: 12px; /* Rounded corners */
+    padding: 2px 6px; /* Padding for aesthetics */
+    font-size: 12px; /* Font size for the count */
+}
+
+/* Message container styles */
+.messages {
+    max-width: 80%;
+    margin: 1em auto;
+    padding: 0.5em;
+}
+
+/* Alert styles */
+.alert {
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    font-size: 1em;
+    text-align: center;
+}
+
+/* Alert type styles */
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error,
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Optional close button */
+.alert .close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+/* Message wrapper to collapse after fade-out */
+.message-wrapper {
+    transition: height 0.5s ease; /* Smooth transition for height collapse */
+}
+
+.message-wrapper.empty {
+    height: 0;          /* Collapses the wrapper */
+    overflow: hidden;    /* Prevents extra space */
+    margin: 0;           /* Removes margin space */
+    padding: 0;          /* Removes padding space */
+}
+
+/* Container styling for all products */
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Styling for individual product cards */
+.product-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for product images */
+.product-image {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.off-percentage {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Styling for product details section */
+.product-details {
+    padding: 15px;
+}
+
+/* Category name styling */
+.product-details .category {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+/* Product title styling */
+.product-details h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Product description styling */
+.product-details .description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Price and cart button container styling */
+.price-and-cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Price styling */
+.price-and-cart .price {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.price-and-cart .price strong {
+    color: #2c8f2e;
+}
+
+/* Old price styling */
+.price-and-cart .old-price {
+    text-decoration: line-through;
+    color: #b0b0b0;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* button styling */
+.small-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.small-button:hover {
+    border: #d1ecf1;
+}

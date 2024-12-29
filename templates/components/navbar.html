@@ -1,0 +1,67 @@
+<!--Navbar-->
+<!--Use the Django include tag to place this in all pages-->
+<nav class="navbar navbar-expand-lg text-bg-info rounded-bottom" style="background-color: var(--bs-content-bg); border-bottom: var(--bs-border-width) solid var(--bs-content-border-color);">
+    <div class="container-fluid">
+        <!--LOGO-->
+        <a class="navbar-brand" href="{% url 'core:index' %}">
+            <h1 class="text-white">
+                $peed-E-$ales
+            </h1>
+        </a>
+        <!--Toggle Navbar (for small screens)-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-theme="dark" data-bs-target="#navbar-collapse-1" aria-controls="navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--Collapsable Elements-->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!--Profile Options-->
+                <h5>
+                    {%if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if user.is_authenticated %}
+                                Hi, {{ user.username }}
+                            {% else %}
+                                Profile
+                            {% endif %}                       </a>
+                            <ul class="dropdown-menu mt-lg-2 text-bg-warning rounded-top-0">
+                                    <li><a class="dropdown-item" href="{% url 'core:view_orders' %}">Orders</a></li>
+                                    <!--<li><a class="dropdown-item" href="#">Settings</a></li>-->
+                                    <li><a class="dropdown-item" href="{% url 'userauths:sign-out' %}">Log Out</a></li>
+                                </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'userauths:login_page' %}">Log In</a>
+                        </li>                            
+                    {% endif %}
+                </h5>
+                <h5>
+                <!-- Cart -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'cart:cart' %}">Cart <span class="count" id="cart-count">({{ cart.get_qty }})</span></a>                    
+                </li>                
+                </h5>
+                <!--Product Categories -->
+                <h5>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu mt-lg-2 text-bg-warning rounded-top-0">
+                            <li><a class="dropdown-item" href="{% url 'core:products_by_category' 'Clothing' %}">Clothing</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:products_by_category' 'Technology' %}">Technology</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:products_by_category' 'Food' %}">Food</a></li>
+                        </ul>
+                    </li>
+                </h5>
+            </ul>
+            <!--Search Bar-->
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search items" aria-label="Search">
+                <button class="btn btn-primary text-bg-warning" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

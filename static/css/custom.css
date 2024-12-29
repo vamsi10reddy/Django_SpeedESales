@@ -1,0 +1,188 @@
+.card-body {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Push buttons to the left and right */
+    align-items: stretch; /* Ensure both buttons stretch to the same height */
+    gap: 10px; /* Space between buttons */
+}
+
+.card-body .btn {
+    flex: 1; /* Make buttons equal in width */
+    text-align: center;
+    height: 75%; /* Ensure buttons fill the available height */
+    display: flex; /* Ensure proper alignment of text inside */
+    justify-content: center; /* Center text horizontally */
+}
+
+/* Styling for the overall container */
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    background-color: transparent;
+}
+
+/* Styling for individual product cards */
+.product-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 20px;
+}
+
+/* Hover effect for product card */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for product images */
+.product-image {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+/* Discount badge styling */
+.off-percentage {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Styling for product details section */
+.product-details {
+    padding: 15px;
+}
+
+/* Category name styling */
+.product-details .category {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+/* Product title styling */
+.product-details h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Product description styling */
+.product-details .description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Price and cart button container styling */
+.price-and-cart {
+    display: flex;
+    flex-direction: column; /* Stacks elements vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Spacing between rows */
+}
+
+/* Price styling */
+.price-and-cart .price {
+    font-size: 16px;
+    color: #2c8f2e;
+    margin-bottom: 0;
+}
+
+.price-and-cart .old-price {
+    text-decoration: line-through;
+    color: #b0b0b0;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* Quantity selector container */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the quantity field and label */
+    gap: 15px; /* Added space between the label and quantity input */
+    margin-bottom: 15px; /* Space between quantity and add-to-cart button */
+    width: 100%; /* Ensure it's full width */
+}
+
+/* Label styling for quantity input */
+.quantity-selector label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Quantity input field styling */
+.quantity-selector input[type="number"] {
+    width: 80px;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+/* Quantity input field focus effect */
+.quantity-selector input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Add to cart button styling */
+.small-button {
+    padding: 12px 15px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Add to cart button hover effect */
+.small-button:hover {
+    border: #fff;
+}
+
+/* Responsive styling for mobile */
+@media (max-width: 600px) {
+    .product-card {
+        width: 100%; /* Ensure product cards take full width on mobile */
+    }
+
+    .price-and-cart {
+        width: 100%; /* Ensure price and cart section takes full width */
+    }
+
+    .add-to-cart, .quantity-selector input[type="number"] {
+        width: 100%; /* Make inputs and button full width on small screens */
+    }
+}

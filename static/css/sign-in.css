@@ -1,0 +1,132 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling with background gradient */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+/* Container styling with soft shadow and rounded corners */
+.form-container {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading styling */
+.form-container h2 {
+    margin-bottom: 1.5rem;
+    color: #444;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Form group styling with spacing */
+.form-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Input styling with rounded corners and focus effect */
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+    background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+    border-color: #6e8efb;
+    box-shadow: 0 0 8px rgba(110, 142, 251, 0.4);
+    outline: none;
+    background-color: #fff;
+}
+
+/* Submit button with gradient, hover effect, and rounded corners */
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #5d7ae3, #946fd1);
+    box-shadow: 0 8px 16px rgba(110, 142, 251, 0.4);
+}
+
+/* Responsive design for smaller devices */
+@media (max-width: 600px) {
+    .form-container {
+        padding: 1.5rem;
+    }
+}
+
+/* Alert message styling */
+.alert-message {
+    background-color: rgb(246, 216, 216); /* Light red background */
+    color: #d52133; /* Dark red text */
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Existing user section */
+.existing-user {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+.existing-user a {
+    color: #a777e3;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.existing-user a:hover {
+    color: #5c1daa;
+}

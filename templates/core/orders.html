@@ -1,0 +1,42 @@
+{% extends 'components/base.html' %}
+{% block content %}
+<h1 class="text-center text-white mt-5">
+    {{category}}
+</h1>
+<div id="products-{{category}}" class="container align-items-c mt-5">
+    <!--Product Card-->
+    {% if customer_orders%}
+        {% for order, address, products in customer_orders %}
+            <div class="container bg-white rounded m-5 pb-1">
+                <h3>Order: {{order.id}}</h3>
+                {% for item in products %}
+                <div class="row m-5">
+                    <img src="{{item.product.image.url}}" class="col-1 rounded-5" alt="A photo of {{product.name}}">
+                    <h5 class="col-3">{{item.product.title}}</h5>
+                    <h5 class="col-3">Qty: {{item.qty}}</h5>
+                    <h5 class="col-3">Price: {{item.total_price}}</h5>
+                </div>
+                {% endfor %}
+                <div class="row m-5 border-top border-dark border-2 pt-4">
+                    <span class="col-1"></span>
+                    <h5 class="col-3">Total</h5>
+                    <h5 class="col-3">Qty: {{total_qty}}</h5>
+                    <h5 class="col-3">Price: ${{total_price}}</h5>
+                </div>
+                {% if address %}
+                <div class="row m-5 border-top border-dark border-2 pt-4">
+                    <span class="col-1"></span>
+                    <h5 class="col-11">Sent to: {{address.send_to}} at {{address.address}}, {{address.city}}, {{address.zipCode}}</h5>
+                </div>
+                {% endif %}
+            </div>    
+
+        {% endfor %}
+    {% else %}
+        <h3 class="text-center text-white mt-3">
+            You have not placed any orders
+        </h3>
+    {% endif %}
+</div>
+
+{% endblock %}

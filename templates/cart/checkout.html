@@ -1,0 +1,128 @@
+{% extends 'components/base.html' %}
+{% block content %}
+<!-- Load static files -->
+{% load static %}
+
+<!-- Include the checkout.css file -->
+<head>
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+</head>
+
+<div class="container mt-5">
+    <h1 class="text-center text-light">Checkout</h1>
+    <div class="row mt-5">
+        <!-- Order Summary -->
+        <div class="col-md-6">
+            <h3 class="text-light">Order Summary</h3>
+            <div class="bg-light text-dark p-4 rounded">
+                <ul class="list-group">
+                    <!-- Headings Row -->
+                    <li class="list-group-items d-flex justify-content-between align-items-center font-weight-bold text-center">
+                        <span class="col-4">Product</span>
+                        <span class="col-4">Quantity</span>
+                        <span class="col-4">Price</span>
+                    </li>
+                    <!-- Loop through cart data -->
+                    {% for product, qty, total_price in cart_data %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center font-weight-bold text-center">
+                        <!-- Product Image and Title -->
+                        <div class="d-flex flex-column align-items-center col-4">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="50" height="50" class="mb-2">
+                            <span>{{ product.title }}</span>
+                        </div>
+                        <span class="col-4">{{ qty }} x ${{ product.price }}</span>
+                        <span class="col-4">${{ total_price|floatformat:2 }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <strong>Subtotal:</strong>
+                    <span>${{ subtotal }}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>Taxes:</strong>
+                    <span>${{ taxes }}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>Total:</strong>
+                    <span>${{ total }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Billing Details -->
+        <div class="col-md-6">
+            <h3 class="text-light">Billing Details</h3>
+            <form id="checkout-form" class="bg-light text-dark p-4 rounded" method="POST" action="{% url 'cart:checkout' %}">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" class="form-control" placeholder="Enter your city" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="zipCode">ZIP Code:</label>
+                    <input type="text" id="zipCode" name="zipCode" class="form-control" placeholder="Enter your ZIP code" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="paymentMethod">Payment Method:</label>
+                    <select id="paymentMethod" name="paymentMethod" class="form-control">
+                        <option value="cod">Cash on Delivery</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="credit-card">Credit Card</option>
+                    </select>
+                </div>
+
+                <!-- Payment Button -->
+                <button type="submit" id="payment-button" class="btn btn-info text-white mt-3 w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- js/ajax to deal with button -->
+<script>
+    //look for button
+    $(document).on('click','#payment-button', function(inp){
+        inp.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'cart:checkout' %}",
+            data: {
+                paymentMethod: $(`#paymentMethod`).val(),
+                fullName: $(`#fullName`).val(),
+                address: $(`#address`).val(),
+                city: $(`#city`).val(),
+                zipCode: $(`#zipCode`).val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            
+            success: function(json){
+                // Redirect to index page on success
+                console.log('Checkout successful');
+                window.location.href = "{% url 'core:index' %}";
+            },
+
+            error: function(){
+                console.log("Error checking out")
+                //error badge
+                document.getElementById('cart-badge').textContent = "Unable to checkout."
+                $('#cart-badge').addClass('show alert-danger');
+                // Hide after 5 seconds
+                setTimeout(function () {
+                    $('#cart-badge').removeClass('show alert-danger');
+                }, 5000);
+            }
+        });
+    });
+</script>
+
+{% endblock %}
