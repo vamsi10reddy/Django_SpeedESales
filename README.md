@@ -18,20 +18,33 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the project repository** to your local machine:
    ```bash
-   git clone https://github.com/vamsi10reddy/speedesales.git
+   git clone https://github.com/vamsi10reddy/Django_SpeedESales.git
    ```
 
 2. **Navigate to the project directory**:
    ```bash
-   cd speedesales
+   cd Django_SpeedESales-main 
    ```
+## Install Necessary Packages
+Use the terminal in Visual Studio Code to install the required packages. Run the following command, using either `pip` or `pip3` depending on which one is supported in your environment:
+
+```bash
+pip3 install django
+pip3 install paypalrestsdk
+pip3 install django-jazzmin
+pip3 install paypal
+pip3 install paypal.standard
+pip3 install django-paypal
+pip3 install shortuuid
+pip3 install Pillow
+```
 
 ## Run the Migrations
 
 Before running the server, you need to apply migrations:
 
 ```bash
-python manage.py migrate
+python3 manage.py migrate
 ```
 
 ## Start the Development Server
@@ -39,7 +52,7 @@ python manage.py migrate
 To run the project, use the following command:
 
 ```bash
-python manage.py runserver
+python3 manage.py runserver
 ```
 
 ## Access the Application
