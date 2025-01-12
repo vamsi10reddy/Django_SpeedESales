@@ -1,3 +1,31 @@
+# Website Images
+
+## Signin
+![Signin](static/sample%20images%20of%20website/signin.jpg)
+
+## Signup
+![Signup](static/sample%20images%20of%20website/signup.gitkeep.jpg)
+
+## Django Admin Portal
+![Django Admin Portal](static/sample%20images%20of%20website/django%20admin%20portal.jpg)
+
+## Homepage
+![Homepage](static/sample%20images%20of%20website/homepage.jpg)
+
+## Category List
+![Category List](static/sample%20images%20of%20website/category%20list.jpg)
+
+## Featured Products
+![Featured Products](static/sample%20images%20of%20website/featured%20[roducts.jpg)
+
+## Product Detail
+![Product Detail](static/sample%20images%20of%20website/product%20detail.jpg)
+
+## Checkout
+![Checkout](static/sample%20images%20of%20website/checkout.jpg)
+
+## Ordered Status
+![Ordered Status](static/sample%20images%20of%20website/ordered%20status.jpg)
 
 # Running the Django Project
 
